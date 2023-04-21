@@ -46,42 +46,49 @@
     }
 
     ?>
-<div class="add">
-    <form method="post">
-        <label for="location">Location:</label>
-        <input type="text" name="location" required>
-        <br><br>
-        <label for="rooms">Rooms:</label>
-        <input type="number" name="rooms" required>
-        <br><br>
-        <label for="size">Size:</label>
-        <select name="size" id="size">
-        <option value="Small">Small</option>
-        <option value="Medium">Medium</option>
-        <option value="Large">Large</option>
-        </select>
-        <br><br>
-        <label for="furnished">Furnished:</label>
-        <select name="furnished" required>
-                <option value="1" <?php if ($furnished == 1) echo "selected"; ?>>Yes</option>
-                <option value="0" <?php if ($furnished == 0) echo "selected"; ?>>No</option>
-        </select>
+    <div class="topnav">
+        <a href="home.html">Home</a>
+        <a class="active" href="house.php">Houses</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+    </div>
+
+    <div class="add">
+        <form method="post">
+            <label for="location">Location:</label>
+            <input type="text" name="location" required>
             <br><br>
-        <label for="parking">Parking:</label>
-        <select name="parking" required>
-            <option value="1" <?php if ($parking == 1) echo "selected"; ?>>Yes</option>
-            <option value="0" <?php if ($parking == 0) echo "selected"; ?>>No</option>
-        </select>
-        <br><br>
-        <label for="price">Price:</label>
-        <input type="number" name="price" required>
-        <br><br>
-        <label for="id">ID:</label>
-        <input type="number" name="id" required>
-        <br><br>
-        <input type="submit" name="submit" value="Add Entry">
-    </form>
-</div>
+            <label for="rooms">Rooms:</label>
+            <input type="number" name="rooms" required>
+            <br><br>
+            <label for="size">Size:</label>
+            <select name="size" id="size">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
+            </select>
+            <br><br>
+            <label for="furnished">Furnished:</label>
+            <select name="furnished" required>
+                    <option value="1" <?php if ($furnished == 1) echo "selected"; ?>>Yes</option>
+                    <option value="0" <?php if ($furnished == 0) echo "selected"; ?>>No</option>
+            </select>
+                <br><br>
+            <label for="parking">Parking:</label>
+            <select name="parking" required>
+                <option value="1" <?php if ($parking == 1) echo "selected"; ?>>Yes</option>
+                <option value="0" <?php if ($parking == 0) echo "selected"; ?>>No</option>
+            </select>
+            <br><br>
+            <label for="price">Price:</label>
+            <input type="number" name="price" required>
+            <br><br>
+            <label for="id">ID:</label>
+            <input type="number" name="id" required>
+            <br><br>
+            <input type="submit" name="submit" value="Add Entry">
+        </form>
+    </div>
 
 <?php
 // Close connection
