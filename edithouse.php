@@ -70,6 +70,13 @@ if (isset($_GET["id"])) {
 mysqli_close($conn);
 ?>
 
+<div class="topnav">
+        <a href="home.html">Home</a>
+        <a class="active" href="house.php">Houses</a>
+        <a href="contact.html">Contact</a>
+        <a href="about.html">About</a>
+</div>
+
 <div class="select-house">
     <h2>Select a House to Edit</h2>
     <form method="get">
@@ -91,7 +98,10 @@ mysqli_close($conn);
             <input type="number" name="rooms" value="<?php echo $rooms; ?>" required>
             <br><br>
             <label for="size">Size:</label>
-            <input type="text" name="size" value="<?php echo $size; ?>" required>
+            <select name="size" id="size">
+            <option value="Small">Small</option>
+            <option value="Medium">Medium</option>
+            <option value="Large">Large</option>
             <br><br>
             <label for="furnished">Furnished:</label>
             <select name="furnished" required>
