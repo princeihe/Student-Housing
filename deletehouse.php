@@ -41,7 +41,7 @@ if (isset($_GET["id"])) {
         $parking = $row["parking"];
         $price = $row["price"];
     } else {
-        echo "House not found.";
+        
     }
 
     // Check if the form has been submitted
@@ -50,10 +50,17 @@ if (isset($_GET["id"])) {
         $sql = "DELETE FROM Houses WHERE id='$id'";
 
         if (mysqli_query($conn, $sql)) {
-            echo "Record deleted successfully.";
+            echo "";
         } else {
             echo "Error deleting record: " . mysqli_error($conn);
         }
+
+        $successMessageDelete = "";
+        if (mysqli_query($conn, $sql)) {
+            $successMessageDelete = "Location: $location, ID: $id has been successfully deleted";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }      
     }
 }
 
@@ -66,6 +73,7 @@ mysqli_close($conn);
         <a class="active" href="house.php">Houses</a>
         <a href="contact.html">Contact</a>
         <a href="about.html">About</a>
+        <a href="index.php">Log Out</a>
 </div>
 
 <div class="select-house">
@@ -75,12 +83,18 @@ mysqli_close($conn);
         <input type="text" name="id" required>
         <input type="submit" value="Delete">
     </form>
+
+    <?php if (isset($_GET["id"]) && mysqli_num_rows($result) == 0) { ?>
+        <div class="error">
+            <p style="color:red">House ID not found.</p>
+        </div>
+    <?php } ?>
 </div>
 
-<div class="edit">
-    <?php if (isset($id)) { ?>
-        <h2>Delete House <?php echo $id; ?></h2>
-        <p>Are you sure you want to delete this house?</p>
+<?php if (isset($id) && mysqli_num_rows($result) > 0) { ?>
+    <div class="edit">
+        <h2 style="color:red">Delete House ID: <?php echo $id; ?></h2>
+        <p style="color:red">Are you sure you want to delete this house?</p>
         <p>Location: <?php echo $location; ?></p>
         <p>Rooms: <?php echo $rooms; ?></p>
         <p>Size: <?php echo $size; ?></p>
@@ -88,12 +102,11 @@ mysqli_close($conn);
         <p>Parking: <?php echo $parking == 1 ? "Yes" : "No"; ?></p>
         <p>Price: <?php echo $price; ?></p>
         <form method="post">
-            <input type="submit" name="submit" value="Delete Entry">
+            <input type="submit" name="submit" value="Delete">
+            <div class="success-message <?php echo $successMessageDelete ? 'visible' : ''; ?>"><?php echo $successMessageDelete; ?></div>
         </form>
-    <?php } else { ?>
-        <p>No house selected for deletion.</p>
-    <?php } ?>
-</div>
+    </div>
+<?php } ?>
 
 </body>
 </html>

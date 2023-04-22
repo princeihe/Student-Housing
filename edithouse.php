@@ -38,11 +38,12 @@ if (isset($_POST["submit"])) {
     // Execute UPDATE query to update existing entry in the database
     $sql = "UPDATE Houses SET location='$location', rooms='$rooms', size='$size', furnished='$furnished', parking='$parking', price='$price' WHERE id='$id'";
 
+    $successMessageEdit = "";
     if (mysqli_query($conn, $sql)) {
-        echo "Record updated successfully.";
+        $successMessageEdit = "Location: $location, ID: $id has been successfully edited";
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
-    }
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }      
 }
 
 // Check if the house ID is provided as a URL parameter
@@ -62,9 +63,11 @@ if (isset($_GET["id"])) {
         $parking = $row["parking"];
         $price = $row["price"];
     } else {
-        echo "House not found.";
+        
     }
 }
+
+  
 
 // Close connection
 mysqli_close($conn);
@@ -75,6 +78,7 @@ mysqli_close($conn);
         <a class="active" href="house.php">Houses</a>
         <a href="contact.html">Contact</a>
         <a href="about.html">About</a>
+        <a href="index.php">Log Out</a>
 </div>
 
 <div class="select-house">
@@ -84,11 +88,17 @@ mysqli_close($conn);
         <input type="text" name="id" required>
         <input type="submit" value="Edit">
     </form>
+    <?php if (isset($_GET["id"]) && mysqli_num_rows($result) == 0) { ?>
+        <div class="error">
+            <p style="color:red">House ID not found.</p>
+        </div>
+    <?php } ?>
 </div>
 
+
 <div class="edit">
-    <?php if (isset($id)) { ?>
-        <h2>Edit House <?php echo $id; ?></h2>
+    <?php if (isset($id) && mysqli_num_rows($result) > 0) { ?>
+        <h2 style="color:green">Edit House ID: <?php echo $id; ?></h2>
         <form method="post">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <label for="location">Location:</label>
@@ -99,9 +109,10 @@ mysqli_close($conn);
             <br><br>
             <label for="size">Size:</label>
             <select name="size" id="size">
-            <option value="Small">Small</option>
-            <option value="Medium">Medium</option>
-            <option value="Large">Large</option>
+                <option value="Small">Small</option>
+                <option value="Medium">Medium</option>
+                <option value="Large">Large</option>
+            </select>   
             <br><br>
             <label for="furnished">Furnished:</label>
             <select name="furnished" required>
@@ -119,10 +130,16 @@ mysqli_close($conn);
             <input type="number" name="price" value="<?php echo $price; ?>" required>
             <br><br>
             <input type="submit" name="submit" value="Update Entry">
+            <div class="success-message <?php echo $successMessageEdit ? 'visible' : ''; ?>"><?php echo $successMessageEdit; ?></div>
         </form>
+
+    <?php } else if (isset($_POST["submit"])) { ?>
+        <p>House not found.</p>
     <?php } else { ?>
-        <p>No house selected for editing.</p>
+        <p style="color:red; padding: 10px">No house selected for editing.</p>
     <?php } ?>
+
 </div>
+
 
 

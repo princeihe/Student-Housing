@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Add House</title>
 </head>
 <body>
 
@@ -30,19 +30,22 @@
         $location = $_POST["location"];
         $rooms = $_POST["rooms"];
         $size = $_POST["size"];
-        $furnished = isset($_POST["furnished"]) ? "Yes" : "No";
-        $parking = isset($_POST["parking"]) ? "Yes" : "No";
+        $furnished = isset($_POST["furnished"]) && $_POST["furnished"] == "1" ? "Yes" : "No";
+        $parking = isset($_POST["parking"]) && $_POST["parking"] == "1" ? "Yes" : "No";
+
+
         $price = $_POST["price"];
         $id = $_POST["id"];
 
         // Execute INSERT query to add new entry to the database
         $sql = "INSERT INTO Houses (location, rooms, size, furnished, parking, price, id) VALUES ('$location', '$rooms', '$size', '$furnished', '$parking', '$price', '$id')";
 
+        $successMessage = "";
         if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully.";
+            $successMessage = "Location: $location, ID: $id has been successfully added";
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
+        }        
     }
 
     ?>
@@ -51,6 +54,7 @@
         <a class="active" href="house.php">Houses</a>
         <a href="contact.html">Contact</a>
         <a href="about.html">About</a>
+        <a href="index.php">Log Out</a>
     </div>
 
     <div class="add">
@@ -87,6 +91,7 @@
             <input type="number" name="id" required>
             <br><br>
             <input type="submit" name="submit" value="Add Entry">
+            <div class="success-message <?php echo $successMessage ? 'visible' : ''; ?>"><?php echo $successMessage; ?></div>
         </form>
     </div>
 

@@ -8,12 +8,12 @@
     <title>Student Residence Management</title>
 </head>
 <body>
-    <h1>Student Residence Management</h1>
     <div class="topnav">
         <a href="home.html">Home</a>
         <a class="active" href="#houses">Houses</a>
         <a href="contact.html">Contact</a>
         <a href="about.html">About</a>
+        <a href="index.php">Log Out</a>
         </div>
     </div>
     <?php 
@@ -32,11 +32,25 @@
     }
     ?>
     
-    <div>
-        <ul><a href = "viewhouse.php">View houses currently in the database</a></ul>
-        <ul><a href = "addhouse.php"> Add new house to the database</a></ul>
-        <ul><a href = "edithouse.php">Edit house in the database</a></ul>
-        <ul><a href = "deletehouse.php">Delete a house from the database</a></ul>
-    </div>
+    <div class="container">
+    <a href="viewhouse.php" class="icon-button">
+        <img src="view.png" alt="View Houses Icon">
+        <h3>View houses currently in the database</h3>
+    </a>
+    <a href="addhouse.php" class="icon-button">
+        <img src="add.png" alt="Add House Icon">
+        <h3>Add new house to the database</h3>
+    </a>
+    <a href="edithouse.php" class="icon-button">
+        <img src="edit.png" alt="Edit House Icon">
+        <h3>Edit house in the database</h3>
+    </a>
+    <a href="deletehouse.php" class="icon-button">
+        <img src="delete.png" alt="Delete House Icon">
+        <h3>Delete a house from the database</h3>
+    </a>
+</div>
+
+
 </body>
 </html>

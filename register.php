@@ -1,4 +1,36 @@
-<?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registration</title>
+</head>
+<body>
+<div class="topnav">
+            <a href="index.php">Login</a>
+            <a class="active" href="register.php">Register</a>
+            <a href="contact2.html">Contact</a>
+            <a href="about2.html">About</a>
+    </div>
+
+    <div class="login-form">
+        <h2>Register</h2>
+        <form method="post">
+            <label for="email">Email:</label>
+            <input type="text" name="email" required>
+            <br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            <br><br>
+            <input type="submit" name="Register" value="Register">
+        </form>
+
+        <button><a href="index.php">Login</a></button>
+    </div>
+
+    <?php
 // Database credentials
 $servername = "localhost";
 $username = "root";
@@ -32,30 +64,5 @@ if (isset($_POST["Register"])) {
 // Close connection
 mysqli_close($conn);
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Registration Form</title>
-</head>
-<body>
-    <div class="registration-form">
-        <h2>Register</h2>
-        <form method="post">
-            <label for="email">Email:</label>
-            <input type="text" name="email" required>
-            <br><br>
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-            <br><br>
-            <input type="submit" name="Register" value="Register">
-        </form>
-
-        <button><a href="index.php">Login</a><button>
-    </div>
 </body>
 </html>
