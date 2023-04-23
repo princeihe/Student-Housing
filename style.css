@@ -13,6 +13,9 @@
   font-size: 17px;
 }
 
+.topnav [href="register.php"] {
+  color: #f2f2f2;
+}
 .topnav [href="index.php"]{
   float: right;
   color: #f2f2f2;
@@ -126,11 +129,22 @@ body {
 .login-form label {
   display: block;
   font-size: 16px;
-  color: #650;   
+  color: #650;  
 }
   
 .login-form input[type="text"],
-.login-form input[type="password"] {
+.login-form input[type="password"] 
+{
+  width: 93%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.login-form input[type="email"] {
   width: 93%;
   padding: 10px;
   font-size: 16px;
@@ -149,6 +163,8 @@ body {
   background-color: #428bca;
   color: #fff;
   cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 10px;
 }
   
 .login-form input[type="submit"]:hover {
@@ -166,10 +182,23 @@ body {
   color: #444;
   cursor: pointer;
   text-align: center;  
+  text-decoration: none;
 }
   
+a[href="register.php"] {
+  text-decoration: none;
+  color: black;
+}
+
+a[href="index.php"] {
+  text-decoration: none;
+  color: black;
+}
+
 .login-form button:hover {
   background-color: rgb(175, 171, 171);
+  text-decoration: none;
+  border: none;
 }
 
 .about {
@@ -283,6 +312,7 @@ body {
   color: red;
   font-weight: bold;
   margin-top: 10px;
+  text-align: center;
 }
 
 .select-house input[type="text"]{

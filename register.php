@@ -19,50 +19,54 @@
         <h2>Register</h2>
         <form method="post">
             <label for="email">Email:</label>
-            <input type="text" name="email" required>
+            <input type="email" name="email" required>
             <br><br>
             <label for="password">Password:</label>
             <input type="password" name="password" required>
             <br><br>
             <input type="submit" name="Register" value="Register">
         </form>
-
         <button><a href="index.php">Login</a></button>
+        <?php
+            $regmessage = "";
+            // Database credentials
+            $servername = "localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "housing";
+
+            // Create connection
+            $conn = mysqli_connect($servername, $username, $password, $dbname);
+
+            // Check connection
+            if (!$conn) {
+                die("Connection failed: " . mysqli_connect_error());
+            }
+
+            // Check if the form has been submitted
+            if (isset($_POST["Register"])) {
+                // Get the form data
+                $email = $_POST["email"];
+                $password = $_POST["password"];
+
+                // Execute INSERT query to add new entry to the database
+                $sql = "INSERT INTO User (email, password) VALUES ('$email', '$password')";
+
+                if (mysqli_query($conn, $sql)) {
+                    $regmessage = "New Account Created Successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
+            }
+
+            // Close connection
+            mysqli_close($conn);
+
+            // Display message if it's not empty
+            if (!empty($regmessage)) {
+                echo '<div class="error-message">' . $regmessage . '</div>';
+            }
+        ?>
     </div>
-
-    <?php
-// Database credentials
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "housing";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-// Check if the form has been submitted
-if (isset($_POST["Register"])) {
-    // Get the form data
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    // Execute INSERT query to add new entry to the database
-    $sql = "INSERT INTO User (email, password) VALUES ('$email', '$password')";
-
-    if (mysqli_query($conn, $sql)) {
-        echo "New account created successfully.";
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-}
-
-// Close connection
-mysqli_close($conn);
-?>
 </body>
 </html>
